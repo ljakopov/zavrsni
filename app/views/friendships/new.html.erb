@@ -1,0 +1,9 @@
+<h1>Add friend</h1>
+<% for user in @user  %>
+<div class="user">
+  <p>
+    <strong><%= user.username%></strong>
+    <%= link_to "Add friend", friendships_path(:friend_id => user), :method => :post %>
+  </p>
+  <%end%>
+</div>

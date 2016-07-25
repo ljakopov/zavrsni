@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+
+
   resources :users do
     resources :posts
   end
 
+  resources :friendships
 
   match ':controller(/:action(/:id))', :via => [:get, :post]
 

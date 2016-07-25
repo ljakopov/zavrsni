@@ -12,5 +12,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def find_user
+    if params[:user_id]
+      @user_re=User.find(params[:user_id])
+    else
+      @user_re=User.find(params[:id])
+      params[:user_id]=params[:id]
+    end
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+
 
 end

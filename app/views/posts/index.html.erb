@@ -3,3 +3,4 @@
 
 <%= link_to "All Users ", users_path, :class=>'action show' if session[:admin]==true %><br>
 <%= link_to "Manage account", edit_user_path(session[:user_id]), :class=>'action show' %><br>
+<%= link_to "Add friend", new_friendship_path, :class=>'action new' %><br>

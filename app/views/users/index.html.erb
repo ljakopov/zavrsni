@@ -2,7 +2,22 @@
 <div class="all_users">
   <%= pluralize(@users.size, 'user') %> found
   <table>
-
+    <tr>
+      <th>Ime</th>
+      <th>Prezime</th>
+      <th>Korisničko ime</th>
+      <th>Admin</th>
+      <th>Private</th>
+      <th>Activate</th>
+    </tr>
+    <% @users.each do |user| %>
+        <td><%= user.first_name %> </td>
+        <td><%= user.last_name %> </td>
+        <td><%= user.username %> </td>
+        <td><%= user.admin %> </td>
+        <td><%= user.private %> </td>
+        <td><%= user.activate %> </td>
+    <%end%>
   </table>
 
 </div>

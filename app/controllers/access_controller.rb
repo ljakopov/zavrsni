@@ -21,7 +21,7 @@ class AccessController < ApplicationController
       session[:user_id]=authorized_user.id
       session[:username]=authorized_user.username
       session[:admin]=authorized_user.admin
-      redirect_to users_path
+      redirect_to user_posts_path(session[:user_id])
     else
       flash[:notice]='Kriva lozika ili password'
       redirect_to(:action => 'login')
