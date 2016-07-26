@@ -1,2 +1,16 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>Create Post</h1>
+<div class="new post">
+<%= form_for :post, url: user_posts_path(@user), html: {multipart: true} do |f| %>
+      <p>
+        <%= f.label :title, "Naslov: "  %>
+        <%= f.text_field :title %>
+      </p>
+      <p>
+        <%= f.label :image, "Slika: " %>
+        <%= f.file_field :username %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+  <% end %>
+</div>

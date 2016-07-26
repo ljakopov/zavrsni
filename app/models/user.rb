@@ -8,4 +8,7 @@ class User < ApplicationRecord
 
   #korisnik ima vise postova
   has_many :posts
+
+  #korisnik ima vise komentara
+  has_many :comments
 end

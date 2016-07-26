@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :friendships
 
+  resources :posts do
+    resources :comments
+  end
+
+
   match ':controller(/:action(/:id))', :via => [:get, :post]
 
 

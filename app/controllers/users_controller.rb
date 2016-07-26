@@ -2,12 +2,16 @@ class UsersController < ApplicationController
 
   layout false
   before_action :confirm_logged_in, :except =>[:new, :create]
+  before_action :find_user, :only => [:show]
+
 
   def index
     @users=User.all
   end
 
   def show
+    @user=@user_re
+    @posts=@user_re.posts
   end
 
   def new
