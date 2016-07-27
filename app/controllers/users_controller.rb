@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user=@user_re
-    @posts=@user_re.posts
+    @posts=@user_re.posts.order(created_at: :desc)
   end
 
   def new

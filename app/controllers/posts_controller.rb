@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     friendships=current_user.friendships
     id=friendships.select(:friend_id)
-    @posts=Post.where(user_id:id).or(Post.where(user_id:session[:user_id]))
+    @posts=Post.where(user_id:id).or(Post.where(user_id:session[:user_id])).order(created_at: :desc)
   end
 
   def show
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   private
 
   def posts_params
-    params.require(:post).permit(:title)
+    params.require(:post).permit(:title, :image)
   end
 
 end

@@ -1,19 +1,8 @@
+<h1>Profil for <%= @user.username%><%= image_for(@user)%></h1>
 <div><%= pluralize(@posts.size, 'post') %> found </div>
     <table class="listing" summary="Post list">
-      <%= link_to "Dodaj novi post", new_user_post_path(@user), :class => 'action new' if session[:user_id]!=params[:user_id] %>
-      <tr class="header">
-        <th>&nbsp;</th>
-        <th>Title</th>
-        <th>Slika</th>
-      </tr>
+      <%= link_to "Dodaj novi post", new_user_post_path(@user), :class => 'action new' if session[:user_id]==@user.id %>
       <% @posts.each do |post| %>
-          <tr class="<%= cycle('odd', 'even') %>">
-            <td><%= post.title %></td>
-            <td class="actions">
-              <%= link_to "Show", user_post_path(@user, post.id), :class=>'action show'%>
-              <%= link_to("Edit", '', :class=>'action edit')%>
-              <%= link_to("Delete", '', :class=>'action delete')%>
-            </td>
-          </tr>
+          <%= link_to user_post_path(@user,post.id) do %><div><%=post.title =image_tag post.image.url(:thumb)%> </div><%end%>
       <% end %>
     </table>

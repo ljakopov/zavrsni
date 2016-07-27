@@ -11,4 +11,6 @@ class User < ApplicationRecord
 
   #korisnik ima vise komentara
   has_many :comments
+
+  mount_uploader :image, UserImageUploader
 end
