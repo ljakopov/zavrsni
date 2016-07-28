@@ -1,6 +1,5 @@
 class AccessController < ApplicationController
 
-  layout false
 
   def index
   end
