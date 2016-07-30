@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 
-  layout false
   before_action :confirm_logged_in
 
   def index
@@ -20,7 +19,7 @@ class PostsController < ApplicationController
   def create
     @post=current_user.posts.create(posts_params)
     if @post.save
-      redirect_to user_posts_path
+      redirect_to user_path(current_user)
     else
       render('new')
     end
@@ -31,6 +30,18 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def upvote
+    @post=Post.find(params[:id])
+    @post.upvote_from current_user
+    redirect_to request.referrer
+  end
+
+  def downvote
+    @post=Post.find(params[:id])
+    @post.downvote_from current_user
+    redirect_to request.referrer
   end
 
   private

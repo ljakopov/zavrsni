@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :posts do
+    member do
+      put "like" => "posts#upvote"
+      put "unlike" => "posts#downvote"
+    end
+  end
 
   match ':controller(/:action(/:id))', :via => [:get, :post]
 

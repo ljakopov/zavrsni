@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  layout false
+
   before_action :confirm_logged_in, :except =>[:new, :create]
   before_action :find_user, :only => [:show]
 

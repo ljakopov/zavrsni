@@ -13,4 +13,7 @@ class User < ApplicationRecord
   has_many :comments
 
   mount_uploader :image, UserImageUploader
+
+  acts_as_voter
+
 end

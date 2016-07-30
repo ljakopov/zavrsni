@@ -28,4 +28,10 @@ class AccessController < ApplicationController
 
   end
 
+  def logout
+    session[:user_id]=nil
+    session[:username]=nil
+    redirect_to(:action =>"login")
+  end
+
 end

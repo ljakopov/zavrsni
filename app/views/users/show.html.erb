@@ -1,8 +1,15 @@
-<h1>Profil for <%= @user.username%><%= image_for(@user)%></h1>
+<h1 style="text-align: center"><%= image_for(@user)%><%= @user.username%></h1>
 <div><%= pluralize(@posts.size, 'post') %> found </div>
-    <table class="listing" summary="Post list">
       <%= link_to "Dodaj novi post", new_user_post_path(@user), :class => 'action new' if session[:user_id]==@user.id %>
       <% @posts.each do |post| %>
-          <%= link_to user_post_path(@user,post.id) do %><div><%=post.title =image_tag post.image.url(:thumb)%> </div><%end%>
-      <% end %>
-    </table>
+          <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <a href="<%=user_post_path(@user,post.id)%>" class="thumbnail">
+                <h5 style="text-align: center">
+                  <%= post.title %></h5>
+                <%=image_tag post.image.url(:thumb), size: "300x300"%>
+              </a>
+            </div>
+<% end %>
+            </div>
+

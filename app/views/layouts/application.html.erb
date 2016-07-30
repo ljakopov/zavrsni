@@ -5,10 +5,39 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'users', media: 'all' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">Brand</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><%= link_to "My Account", user_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
+          <li class="active"><%= link_to "Manage account", edit_user_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
+          <li class="active"><%= link_to "Add friend", new_friendship_path, :class=>'action new' if session['user_id']%></li>
+          <li class="active"><%= link_to "Create new post", new_user_post_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
+          <li class="active"><%= link_to "My Account", user_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Log Out ", :controller =>'access', :action => :logout if session['user_id'] %></li>
+          <li><%= link_to "Sign Up ", new_user_path, :class=>'action show' unless session['user_id'] %><br></li>
+          <li><%= link_to "Log In ", :action => :login, :class=>'action show' unless session['user_id'] %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <div class="container">
 
     <%= yield %>
