@@ -1,0 +1,9 @@
+<h1>Add friend to <%= @group.title%> grupa</h1>
+<% for friend in @friendships  %>
+    <div class="user">
+      <p>
+        <strong><%= friend.friend.username%></strong>
+        <%= link_to "Put friend to group",   user_group_group_users_path(friend.friend.id,@group), :method => 'post' %>
+      </p>
+<%end%>
+</div>

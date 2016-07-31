@@ -1,18 +1,6 @@
 Rails.application.routes.draw do
-
-  get 'usergroups/index'
-
-  get 'usergroups/new'
-
   resources :users do
     resources :posts
-  end
-
-  resources :users do
-    resources :groups do
-      resources :usergroups
-    end
-
   end
 
   resources :friendships
@@ -20,6 +8,14 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+
+  resources :users do
+    resources :groups do
+      resources :group_users
+    end
+  end
+
 
   resources :posts do
     member do

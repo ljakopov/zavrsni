@@ -1,5 +1,4 @@
 class Group < ApplicationRecord
-
   #grupa pripada jednom korisniku
   belongs_to :user
 

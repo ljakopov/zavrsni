@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+
   def index
     @groups=Group.where(user_id:current_user)
   end
@@ -22,7 +23,8 @@ class GroupsController < ApplicationController
   end
 
   private
- def groups_params
+  def groups_params
     params.require(:group).permit(:title, :description)
   end
+
 end

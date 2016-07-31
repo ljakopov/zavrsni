@@ -1,9 +1,0 @@
-<h1>Add friend</h1>
-<% for friend in @friendships  %>
-    <div class="user">
-      <p>
-        <strong><%= friend.friend.username%></strong>
-        <%= link_to "Put friend to group", user_group_usergroups_path(friend,@group) %>
-      </p>
-<%end%>
-</div>
