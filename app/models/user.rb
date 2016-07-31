@@ -12,8 +12,14 @@ class User < ApplicationRecord
   #korisnik ima vise komentara
   has_many :comments
 
+  #korisnik može kreirati više grupa
+  has_many :groups
+
+  has_many :group_users
+
   mount_uploader :image, UserImageUploader
 
   acts_as_voter
+
 
 end
