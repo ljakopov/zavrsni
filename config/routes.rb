@@ -3,8 +3,14 @@ Rails.application.routes.draw do
     resources :posts
   end
 
-  resources :friendships
+  resources :users, :only => [:admin]    do
+    member do
+      get "admin" => "users#admin"
+      get "active" => "users#active"
+    end
+  end
 
+  resources :friendships, :only => [:index, :new, :create, :delete]
   resources :posts do
     resources :comments
   end
@@ -17,7 +23,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :posts do
+  resources :posts, :only => [:upvote, :downvote] do
     member do
       put "like" => "posts#upvote"
       put "unlike" => "posts#downvote"
@@ -26,9 +32,7 @@ Rails.application.routes.draw do
 
   match ':controller(/:action(/:id))', :via => [:get, :post]
 
-
   root "posts#index"
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

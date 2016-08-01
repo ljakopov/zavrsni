@@ -1,7 +1,7 @@
 <h1>All Users</h1>
 <div class="all_users">
   <%= pluralize(@users.size, 'user') %> found
-  <table>
+  <table class="table">
     <tr>
       <th>Ime</th>
       <th>Prezime</th>
@@ -9,14 +9,21 @@
       <th>Admin</th>
       <th>Private</th>
       <th>Activate</th>
+      <th>Actions</th>
     </tr>
     <% @users.each do |user| %>
+        <tr class="<%= cycle('active', 'success','warning', 'danger','info') %>">
         <td><%= user.first_name %> </td>
         <td><%= user.last_name %> </td>
         <td><%= user.username %> </td>
         <td><%= user.admin %> </td>
         <td><%= user.private %> </td>
         <td><%= user.activate %> </td>
+        <td>
+          <%= link_to "Admin", admin_user_path(user), class:"btn btn-default", role:"button" %>
+          <%= link_to "Active", active_user_path(user), class:"btn btn-default", role:"button"  %>
+        </td>
+        </tr>
     <%end%>
   </table>
 

@@ -43,6 +43,28 @@ class UsersController < ApplicationController
   def delete
   end
 
+  def admin
+    @user=User.find(params[:id])
+    if @user.admin==false
+      @user.admin=true
+    else
+      @user.admin=false;
+    end
+    @user.save
+    redirect_to users_path
+  end
+
+  def active
+    @user=User.find(params[:id])
+    if @user.activate==false
+      @user.activate=true
+    else
+      @user.activate=false;
+    end
+    @user.save
+    redirect_to users_path
+  end
+
   private
 
   def user_params
