@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-  layout false
   before_action :confirm_logged_in
   def create
   end

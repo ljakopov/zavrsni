@@ -1,6 +1,8 @@
+<%= link_to "Dodaj novi post", new_user_post_path(@user), :class => 'action new' if session[:user_id]==@user.id %>
 <h1 style="text-align: center"><%= image_for(@user)%><%= @user.username%></h1>
 <div><%= pluralize(@posts.size, 'post') %> found </div>
-      <%= link_to "Dodaj novi post", new_user_post_path(@user), :class => 'action new' if session[:user_id]==@user.id %>
+<div style="text-align: center"><%= pluralize(@user.friends.size,'following')%></div>
+<div style="text-align: right"><%= pluralize(@followers,'followers')%></div>
       <% @posts.each do |post| %>
           <div class="row">
             <div class="col-xs-6 col-md-4">

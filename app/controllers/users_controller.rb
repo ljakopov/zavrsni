@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
     @user=@user_re
     @posts=@user_re.posts.order(created_at: :desc)
+    @followers=Friendship.where(friend_id:@user).size
   end
 
   def new

@@ -8,3 +8,12 @@ a.trumbnail{
   margin-left: 0px;
   margin-right: 0px;
 }
+@media only screen and (min-width: 600px) {
+  .row1 {
+    margin-left: 200px;
+  }
+
+  .title{
+    margin-left: 210px;
+  }
+}
