@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment=@post.comments.create(comment_params)
     @comment.user_id=session[:user_id]
     if @comment.save
+      track_activity @comment
       redirect_to request.referrer
     end
   end

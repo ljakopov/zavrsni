@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
   def create
     @group=current_user.groups.create(groups_params)
     if @group.save
+      track_activity @group
       redirect_to user_groups_path
     else
       render('new')

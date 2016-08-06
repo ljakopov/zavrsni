@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def create
     @post=current_user.posts.create(posts_params)
     if @post.save
+      track_activity @post
       redirect_to user_path(current_user)
     else
       render('new')
@@ -35,15 +36,9 @@ class PostsController < ApplicationController
   def upvote
     @post=Post.find(params[:id])
     @post.upvote_from current_user
+    track_activity @post
     redirect_to request.referrer
   end
-
-  def downvote
-    @post=Post.find(params[:id])
-    @post.downvote_from current_user
-    redirect_to request.referrer
-  end
-
   private
 
   def posts_params

@@ -1,7 +1,5 @@
 class FriendshipsController < ApplicationController
   before_action :confirm_logged_in
-  def create
-  end
 
   def new
     current_user_friendships=current_user.friendships
@@ -11,10 +9,11 @@ class FriendshipsController < ApplicationController
     @friendship=Friendship.new
   end
 
-  def index
+  def create
     @friendship=current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
       flash[:notice]="Added friend"
+      track_activity @friendship
       redirect_to new_friendship_path
     else
       flash[:error] = "Unable to add friend"

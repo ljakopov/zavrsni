@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :group_users
   mount_uploader :image, UserImageUploader
 
+  has_many :activities
+
   acts_as_voter
 
 end

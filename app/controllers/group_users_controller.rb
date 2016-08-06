@@ -16,6 +16,7 @@ class GroupUsersController < ApplicationController
     group.group_users << @groups
     user.group_users << @groups
     if @groups.save
+      track_activity @groups
       redirect_to new_user_group_group_user_path(@groups)
     end
 
