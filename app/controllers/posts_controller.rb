@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       track_activity @post
       redirect_to user_path(current_user)
     else
-      render('new')
+      render ('new')
     end
   end
 

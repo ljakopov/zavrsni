@@ -22,7 +22,4 @@ class GroupUsersController < ApplicationController
 
   end
 
-
-  private
-
 end

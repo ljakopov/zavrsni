@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @comment.user_id=session[:user_id]
     if @comment.save
       track_activity @comment
-      redirect_to request.referrer
+      render 'posts/post', :@posts => @post
     end
   end
   private

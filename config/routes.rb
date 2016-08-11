@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   end
 
   resources :friendships, :only => [:index, :new, :create, :delete]
+
   resources :posts do
     resources :comments
   end
 
+  resources :comments, :only => [:create]
 
   resources :users do
     resources :groups do

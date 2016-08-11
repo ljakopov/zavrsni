@@ -1,9 +1,9 @@
 <div class="posts">
   <th>title: </th>
+  <td style="text-align: center"><%= @post.user.username%></td>
   <td><%= @post.title %></td>
-  <td> <%= @post.user.username %></td>
+  <td><%=image_tag @post.image.url(:big)%></td>
   </td>
-</div>
 
 <div id="comments">
   <h2><%= @post.comments.count %> Comments</h2>
@@ -11,4 +11,5 @@
 
   <h3>Add a comment</h3>
 <%= render "comments/form"%>
+</div>
 </div>
