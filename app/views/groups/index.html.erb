@@ -1,14 +1,25 @@
-<h1>All Groups</h1>
+<h1>My Groups</h1>
 <div class="all_users">
-  <%= pluralize(@groups.size, 'group') %> found
-  <table>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-    </tr>
-    <% @groups.each do |group| %>
-        <td><%= link_to group.title, user_group_path(@current_user,group) %> </td>
+  <%= pluralize(@groups.size, 'group')%> found
+  <%= link_to "Create new group", new_user_group_path(session[:user_id]), class:"btn btn-success", role:"button" %>
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Group size</th>
+    <th>Actions</th>
+  </tr>
+  </tr>
+  <% @groups.each do |group| %>
+      <tr class="<%= cycle('active', 'success','warning', 'danger','info') %>">
+        <td><%= link_to group.title, user_group_path(@current_user,group), class:"btn btn-warning btn-sm" %> </td>
         <td><%= group.description %> </td>
-    <%end%>
-  </table>
-</div>
+        <td><%= GroupUser.where(group_id:group).size %></td>
+        <td>
+          <%= link_to "Add or remove friends",  new_user_group_group_user_path(:group_id=>group), class:"btn btn-primary btn-sm"%>
+          <%= link_to "Delete group", user_group_path(session[:user_id], group), :method=>'delete', class:"btn btn-danger btn-sm"%>
+        </td>
+      </tr>
+  <%end%>
+</table>
+  </div>

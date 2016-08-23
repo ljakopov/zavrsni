@@ -6,9 +6,9 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string "image"
       t.string "username"
       t.string "password"
-      t.boolean "activate", :default => true
+      t.string "email"
+      t.boolean "activate", :default => false
       t.boolean "admin", :default => false
-      t.boolean "private", :default => true
       t.timestamps
     end
   end

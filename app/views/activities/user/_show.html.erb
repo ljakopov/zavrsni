@@ -1,0 +1,3 @@
+show user <%= link_to activity.trackable.username, user_path(activity.trackable.id) %>
+<%= image_tag activity.trackable.image.url(:big) if  activity.trackable.image? %>
+<%= time_ago_in_words(activity.created_at)%>

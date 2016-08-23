@@ -1,3 +1,4 @@
 add to group <%= link_to activity.trackable.group.title, user_group_path(activity.trackable.group.user_id,activity.trackable.group.id) %> user
 <%= link_to activity.trackable.user.username, activity.trackable.user %>
 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+<%= time_ago_in_words(activity.trackable.created_at)%>

@@ -1,8 +1,12 @@
 <h1>Activities</h1>
 
 <% @activities.each do |activity| %>
-    <div>
+    <div class="row">
+      <div class="col-sm-5 col-md-6">
+        <div class="thumbnail">
       <%= link_to activity.user.username, activity.user  %>
       <%= render "activities/#{activity.trackable_type.underscore}/#{activity.action}", :activity => activity %>
+        </div>
       </div>
+    </div>
 <%end%>

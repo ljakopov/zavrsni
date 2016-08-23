@@ -1,22 +1,27 @@
-<% @posts.each do |post| %>
+<% @posts.each do |post|  %>
     <div class="row">
       <div class="col-sm-9 col-md-10">
         <div class="thumbnail">
           <%=link_to image_for(post.user, size:45) + post.user.username, user_path(post.user_id) %>
+          <p>
+          <%= post.title%>
+            </p>
           <img src="<%= post.image.url(:big)%>"  size= "800x800" alt="<%= post.image.url(:thumb)  %>">
           <div class="caption">
             <div class="caption" style="text-align: center;">
               <%= link_to like_post_path(post), class:"like", method: :put do  %>
                   <button type="button" class="btn btn-info" aria-label="Left Align">
                     <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-                    <span class="badge"><%= post.get_upvotes.size %></span>
+                    <span class="badge" ><%= post.get_upvotes.size %></span>
                   </button>
               <%end%>
             </div>
             <p>
             <div id="comments">
               <h2><%= post.comments.count %> Comments</h2>
-              <%= render post.comments %>
+              <div id="com_<%= post.id %>">
+              <%=  render post.comments %>
+                </div>
               <h3>Add a comment</h3>
               <%=  render 'comments/form', :@post => post %>
             </div>

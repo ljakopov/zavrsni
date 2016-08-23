@@ -7,7 +7,6 @@
       <th>Prezime</th>
       <th>Korisničko ime</th>
       <th>Admin</th>
-      <th>Private</th>
       <th>Activate</th>
       <th>Actions</th>
     </tr>
@@ -17,7 +16,6 @@
         <td><%= user.last_name %> </td>
         <td><%= user.username %> </td>
         <td><%= user.admin %> </td>
-        <td><%= user.private %> </td>
         <td><%= user.activate %> </td>
         <td>
           <%= link_to "Admin", admin_user_path(user), class:"btn btn-default", role:"button" %>

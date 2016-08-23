@@ -1,6 +1,5 @@
 class Post < ApplicationRecord
 
-  #post pripada jednom korisniku
   belongs_to :user
 
   has_many :comments
@@ -9,4 +8,5 @@ class Post < ApplicationRecord
 
   acts_as_votable
 
+  validates_presence_of :title, :image
 end

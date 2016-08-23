@@ -1,9 +1,27 @@
-<h1>Add friend to <%= @group.title%> grupa</h1>
-<% for friend in @friendships  %>
-    <div class="user">
-      <p>
-        <strong><%= friend.friend.username%></strong>
-        <%= link_to "Put friend to group",   user_group_group_users_path(friend.friend.id,@group), :method => 'post' %>
-      </p>
-<%end%>
+<div class="left-div">
+  <div class="col-xs-6 col-md-5">
+    <div class="thumbnail">
+      <h1>Add friend </h1>
+      <% for friend in @friendships  %>
+          <p>
+          <strong><%= image_for(friend.friend,size:35) + friend.friend.username%></strong>
+          <%= link_to "Put friend to group",   user_group_group_users_path(friend.friend.id,@group), :method => 'post' %>
+          </p>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class="right-div">
+  <div class="col-xs-6 col-md-5">
+    <div class="thumbnail">
+      <h1>Remove frend</h1>
+      <% for user in @without_group_users %>
+          <p>
+            <strong><%= image_for(user.user,size:35) + user.user.username%></strong>
+            <%= link_to "Delete user from this group", user_group_group_user_path(user.user_id, user.group_id,user.id),  :method => 'delete'  %>
+          </p>
+      <%end%>
+    </div>
+  </div>
 </div>

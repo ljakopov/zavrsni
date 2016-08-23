@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
-  resources :activities
+
+  resources :activities, :only => [:create, :index]
+
 
   resources :users do
     resources :posts
   end
 
-  resources :users, :only => [:admin]    do
+  resources :users, :only => [:admin, :active, :confirm_email]    do
     member do
       get "admin" => "users#admin"
       get "active" => "users#active"
+      get "confirm_email" => "users#confirm_email"
     end
   end
 

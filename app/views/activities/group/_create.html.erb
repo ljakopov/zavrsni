@@ -1,2 +1,3 @@
 create new group <%=link_to activity.trackable.title, user_group_path(activity.trackable.user_id,activity.trackable.id)%>
 <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+<%= time_ago_in_words(activity.trackable.created_at)%>

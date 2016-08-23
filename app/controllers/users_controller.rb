@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 
 
-  before_action :confirm_logged_in, :except =>[:new, :create]
+  before_action :confirm_logged_in, :except =>[:new, :create, :confirm_email]
   before_action :find_user, :only => [:show]
-
 
   def index
     @users=User.all
@@ -13,6 +12,7 @@ class UsersController < ApplicationController
     @user=@user_re
     @posts=@user_re.posts.order(created_at: :desc)
     @followers=Friendship.where(friend_id:@user).size
+    track_activity @user
   end
 
   def new
@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def create
     @user=User.new(user_params)
     if @user.save
+      UserMailer.account_activation(@user).deliver_now
       redirect_to users_path
     else
       render ('new')
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       redirect_to root_path
     else
-      render edit
+      render ('edit')
     end
   end
 
@@ -66,10 +67,21 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def confirm_email
+    user=User.find_by_activation_digest(params[:activation_digest])
+    if user.activate==false
+      user.activate=true
+      user.save
+    else
+      flash[:notice]="User is activate"
+    end
+    redirect_to root_path
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :image, :username, :password)
+    params.require(:user).permit(:first_name, :last_name, :image, :username, :password, :password_confirmation, :email)
   end
 
 end

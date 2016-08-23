@@ -1,0 +1,2 @@
+Click this link to activate your account
+<%= link_to "Activate", confirm_email_user_url(activation_digest: @user.activation_digest ,email: @user.email,id:@user.id ) %>

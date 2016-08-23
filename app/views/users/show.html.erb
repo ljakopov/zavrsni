@@ -1,16 +1,16 @@
-<h1 style="text-align:center"><%= image_for(@user,size:200) %><%= @user.username%></h1>
-  <p style="text-align: left"><%= pluralize(@posts.size, 'post') %> found</p>
-<p style="text-align: center"><%= pluralize(@user.friends.size,'following')%></p>
-<%= pluralize(@followers,'followers')%>
+<div id="container1">
+  <div id="center"> <%= image_for(@user,size:150) %></div>
+<div id="center">  <h1><%= @user.username%></h1></div>
+<div id="center"> <h3><%= pluralize(@posts.size,'post') + " "  + pluralize(@user.friends.size,'following')+" " + pluralize(@followers,'followers') %></h3></div>
+</div>
+<div class="row">
       <% @posts.each do |post| %>
-          <div class="row">
             <div class="col-xs-6 col-md-4">
               <a href="<%=user_post_path(@user,post.id)%>" class="thumbnail">
-                <h5 style="text-align: center">
-                  <%= post.title %></h5>
-                <%=image_tag post.image.url(:thumb), size: "300x300"%>
+                <%=image_tag post.image.url(:thumb), size: "315x320"%>
               </a>
             </div>
-<% end %>
-            </div>
+  <% end %>
+</div>
+
 

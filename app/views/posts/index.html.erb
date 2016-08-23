@@ -1,3 +1,9 @@
 <%= link_to "All Users ", users_path, :class=>'action show' if session[:admin]==true %><br>
-
+<div id="posts">
 <%= render 'posts/post', :@posts => @posts  %>
+</div>
+<% if @posts.size>10  %>
+<div class="paginator" id="paginator" style="text-align: center;">
+<%= link_to_next_page @posts, 'LOAD MORE', remote: true, id:'load_more' %>
+  </div>
+<% end %>

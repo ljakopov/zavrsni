@@ -9,3 +9,92 @@
     margin-bottom: 5px;
     margin-right: 5px;
   }
+@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+
+.titleBox {
+  background-color:#fdfdfd;
+  padding:10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+  padding:5px;
+  border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+  width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+  width:18%;
+}
+.actionBox .form-group * {
+  width:100%;
+}
+.taskDescription {
+  margin-top:10px ;
+}
+.commentList {
+  padding:0;
+  list-style:none;
+  max-height:200px;
+  overflow:auto;
+}
+.commentList li {
+  margin:0;
+  margin-top:10px;
+}
+.commentList li > div {
+  display:table-cell;
+}
+.commenterImage {
+  width:45px;
+  margin-right:5px;
+  height:100%;
+  float:left;
+}
+.commenterImage img {
+  width:100%;
+  border-radius:50%;
+}
+.commentText p {
+  margin:0;
+}
+.sub-text {
+  color:#aaa;
+  font-family:verdana;
+  font-size:11px;
+}
+.actionBox {
+  border-top:1px dotted #bbb;
+  padding:10px;
+}
+
+#paginator {
+  color: #4090DB;
+  height: 80px;
+  width: 80px;
+  margin: 20px auto 20px;
+  position: relative;
+  display: table;
+  border: 2px solid #4090DB;
+  border-radius: 30%;
+  :hover {
+    border: 1px solid #2D6DA8;
+    border-radius: 30%;
+  }
+}
+
+#load_more {
+  display: table-cell;
+  font-size: 12px;
+  padding: 0px 9px;
+  vertical-align: middle;
+  text-decoration: none;
+  a :hover {
+    color: #2D6DA8;
+  }
+}

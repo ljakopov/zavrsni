@@ -6,7 +6,10 @@ class CommentsController < ApplicationController
     @comment.user_id=session[:user_id]
     if @comment.save
       track_activity @comment
-      render 'posts/post', :@posts => @post
+      respond_to do |format|
+        format.html{redirect_back(fallback_location: root_url(@post))}
+        format.js
+      end
     end
   end
   private

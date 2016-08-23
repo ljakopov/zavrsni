@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   def index
     friendships=current_user.friendships
     id=friendships.select(:friend_id)
-    @posts=Post.where(user_id:id).or(Post.where(user_id:session[:user_id])).order(created_at: :desc)
+    @posts=Post.where(user_id:id).or(Post.where(user_id:session[:user_id])).order(created_at: :desc).page params[:page]
+    @comment=Comment.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -38,7 +43,8 @@ class PostsController < ApplicationController
     @post.upvote_from current_user
     track_activity @post
     redirect_to request.referrer
-  end
+     end
+
   private
 
   def posts_params

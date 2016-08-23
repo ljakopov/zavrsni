@@ -2,7 +2,7 @@
 <% for user in @user  %>
 <div class="user">
   <p>
-    <strong><%= user.username%></strong>
+    <strong><%=image_for(user,size:35) +  user.username%></strong>
     <%= link_to "Add friend", friendships_path(:friend_id => user), :method => :post %>
   </p>
   <%end%>

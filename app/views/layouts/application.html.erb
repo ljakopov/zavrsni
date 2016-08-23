@@ -6,6 +6,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'users', media: 'all' %>
     <%= stylesheet_link_tag    'posts', media: 'all' %>
+    <%= stylesheet_link_tag    'groups', media: 'all' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
@@ -24,11 +25,20 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active"><%= link_to "My Account", user_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
-          <li class="active"><%= link_to "Manage account", edit_user_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
+          <li class="dropdown">
+            <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= user_path(session[:user_id]) if session['user_id'] %>">My Account</a></li>
+              <li><a href="<%= edit_user_path(session[:user_id]) if session['user_id'] %>">Edit account</a></li>
+              <li><a href="<%= new_user_post_path(session[:user_id]) if session['user_id'] %>">Create new post</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
           <li class="active"><%= link_to "Add friend", new_friendship_path, :class=>'action new' if session['user_id']%></li>
-          <li class="active"><%= link_to "Create new post", new_user_post_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
-          <li class="active"><%= link_to "My Account", user_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
+          <li class="active"><%= link_to "My Groups", user_groups_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Log Out ", :controller =>'access', :action => :logout if session['user_id'] %></li>

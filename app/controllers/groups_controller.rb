@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :confirm_logged_in
 
   def index
     @groups=Group.where(user_id:current_user)
@@ -21,7 +22,11 @@ class GroupsController < ApplicationController
     else
       render('new')
     end
+  end
 
+  def destroy
+    @group=Group.find(params[:id]).destroy
+    redirect_to user_groups_path(session[:user_id])
   end
 
   private
