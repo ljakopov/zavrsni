@@ -3,18 +3,14 @@
       <div class="col-sm-9 col-md-10">
         <div class="thumbnail">
           <%=link_to image_for(post.user, size:45) + post.user.username, user_path(post.user_id) %>
+          <%= link_to "Delete post",user_post_path(post.user_id, post.id), :method=>'delete', class:"btn btn-primary" if session[:user_id]==post.user_id%>
           <p>
           <%= post.title%>
             </p>
           <img src="<%= post.image.url(:big)%>"  size= "800x800" alt="<%= post.image.url(:thumb)  %>">
           <div class="caption">
-            <div class="caption" style="text-align: center;">
-              <%= link_to like_post_path(post), class:"like", method: :put do  %>
-                  <button type="button" class="btn btn-info" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-                    <span class="badge" ><%= post.get_upvotes.size %></span>
-                  </button>
-              <%end%>
+            <div class="caption_<%= post.id %>" id="caption_<%= post.id %>" style="text-align: center;">
+            <%=  render 'posts/like', :post => post %>
             </div>
             <p>
             <div id="comments">

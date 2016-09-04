@@ -14,11 +14,16 @@ class FriendshipsController < ApplicationController
     if @friendship.save
       flash[:notice]="Added friend"
       track_activity @friendship
-      redirect_to new_friendship_path
+      redirect_to request.referrer
     else
       flash[:error] = "Unable to add friend"
     end
+  end
 
+  def destroy
+    friend=User.find(params[:user_id])
+    Friendship.where(user_id:current_user, friend_id:friend).destroy_all
+    redirect_to user_path(friend)
   end
 
 end

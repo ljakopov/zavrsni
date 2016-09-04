@@ -1,4 +1,13 @@
-<%=  form_for :group, url:user_groups_path(@user) do |f| %>
+<% if @group.errors.any? %>
+  <% @group.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      <%= message %>
+    </div>
+    <% end %>
+<% end %>
+<%=  form_for :group, url:user_groups_path() do |f| %>
     <p>
       <%= f.label :title %><br>
       <%= f.text_field :title, class:"form-control" %>

@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-
-
   before_action :confirm_logged_in, :except =>[:new, :create, :confirm_email]
   before_action :find_user, :only => [:show]
 
@@ -10,9 +8,14 @@ class UsersController < ApplicationController
 
   def show
     @user=@user_re
+    @friends=@user_re.friends
     @posts=@user_re.posts.order(created_at: :desc)
     @followers=Friendship.where(friend_id:@user).size
-    track_activity @user
+    if @user!=current_user
+      @variable=current_user.friendships.exists?(user_id:session[:user_id], friend_id:@user)
+    else
+      @variable=true
+    end
   end
 
   def new
@@ -23,6 +26,7 @@ class UsersController < ApplicationController
     @user=User.new(user_params)
     if @user.save
       UserMailer.account_activation(@user).deliver_now
+      flash[:notice]="Activate your account via email"
       redirect_to users_path
     else
       render ('new')
@@ -42,7 +46,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    @user=User.find(params[:id]).destroy
+    user_posts_path(current_user)
   end
 
   def admin
@@ -78,10 +84,22 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def image
+    @user=User.find(params[:id])
+    if @user.update_attributes(user_params)
+      redirect_to root_path
+    else
+      render ('edit')
+    end
+  end
+
+  def trazi
+      @users = User.search(params[:search]).order("created_at DESC")
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :image, :username, :password, :password_confirmation, :email)
+    params.require(:user).permit(:first_name, :last_name, :image, :username, :password, :password_confirmation, :email, :activation_digest)
   end
-
 end

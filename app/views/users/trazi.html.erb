@@ -1,0 +1,14 @@
+<% if @users.size==User.all.size  %>
+<% else %>
+    <% @users.each do |user| %>
+        <div class="row">
+          <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+              <p>
+                <%= image_for(user)%><%= link_to user.username,  user_path(user)  %>
+              </p>
+            </div>
+          </div>
+        </div>
+    <% end %>
+<% end %>

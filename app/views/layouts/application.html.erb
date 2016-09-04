@@ -25,6 +25,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <% if session['user_id']%>
+              <%= form_tag(trazi_user_path(session[:user_id]), :method => "get", class:"navbar-form navbar-left") do %>
+                <div class="form-group">
+                  <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:"form-control"%>
+                </div>
+                  <%= submit_tag "Search", class:"btn btn-default" %>
+              <% end %>
           <li class="dropdown">
             <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -32,11 +39,13 @@
               <li><a href="<%= edit_user_path(session[:user_id]) if session['user_id'] %>">Edit account</a></li>
               <li><a href="<%= new_user_post_path(session[:user_id]) if session['user_id'] %>">Create new post</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li><a href="<%= activities_path %>">My activities</a></li>
+              <li<% if session[:admin]==true %>><a href="<%= users_path %>">All users</a></li <% end%>>
               <li role="separator" class="divider"></li>
               <li><a href="#">One more separated link</a></li>
             </ul>
           </li>
+          <% end %>
           <li class="active"><%= link_to "Add friend", new_friendship_path, :class=>'action new' if session['user_id']%></li>
           <li class="active"><%= link_to "My Groups", user_groups_path(session[:user_id]), :class=>'action new' if session['user_id']%></li>
         </ul>
@@ -48,8 +57,10 @@
       </div>
     </div>
   </nav>
+  <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+  <% end %>
   <div class="container">
-
     <%= yield %>
   </div>
   </body>

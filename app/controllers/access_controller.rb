@@ -30,6 +30,7 @@ class AccessController < ApplicationController
   end
 
   def logout
+    track_activity current_user
     session[:user_id]=nil
     session[:username]=nil
     redirect_to(:action =>"login")

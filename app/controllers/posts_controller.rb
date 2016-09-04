@@ -6,7 +6,6 @@ class PostsController < ApplicationController
     friendships=current_user.friendships
     id=friendships.select(:friend_id)
     @posts=Post.where(user_id:id).or(Post.where(user_id:session[:user_id])).order(created_at: :desc).page params[:page]
-    @comment=Comment.new
     respond_to do |format|
       format.html
       format.js
@@ -18,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @user=current_user
+    @post=Post.new
   end
 
   def create
@@ -31,19 +30,23 @@ class PostsController < ApplicationController
     end
   end
 
-
-  def update
-  end
-
   def destroy
+    Post.find(params[:id]).destroy
+    redirect_to user_posts_path
   end
 
   def upvote
     @post=Post.find(params[:id])
-    @post.upvote_from current_user
-    track_activity @post
-    redirect_to request.referrer
+     if current_user.voted_for? @post
+     else
+       @post.upvote_from current_user
+       track_activity @post
      end
+    respond_to do |format|
+      format.html{redirect_back(fallback_location:  root_url(@post))}
+      format.js
+    end
+  end
 
   private
 

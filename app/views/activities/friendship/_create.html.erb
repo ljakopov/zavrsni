@@ -1,3 +1,6 @@
+<% if activity.trackable==nil %>
+<% else %>
 add new friend <%= activity.trackable.friend.username  %>
   <span class="glyphicon glyphicon-plus " aria-hidden="true"></span>
 <%= time_ago_in_words(activity.trackable.created_at)%>
+<% end %>

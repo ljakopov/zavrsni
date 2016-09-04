@@ -1,11 +1,12 @@
 <h1>All Users</h1>
 <div class="all_users">
-  <%= pluralize(@users.size, 'user') %> found
+  <%= pluralize(User.all.size, 'user') %> found
   <table class="table">
     <tr>
       <th>Ime</th>
       <th>Prezime</th>
       <th>Korisničko ime</th>
+      <th>Last time login</th>
       <th>Admin</th>
       <th>Activate</th>
       <th>Actions</th>
@@ -15,14 +16,16 @@
         <td><%= user.first_name %> </td>
         <td><%= user.last_name %> </td>
         <td><%= user.username %> </td>
-        <td><%= user.admin %> </td>
-        <td><%= user.activate %> </td>
+        <td><%= time_ago_in_words(user.last_time_login(user)) if user.last_time_login(user)!=nil %></td>
+        <td><%= admin_tag(user) %> </td>
+        <td><%= activate_tag(user) %> </td>
         <td>
-          <%= link_to "Admin", admin_user_path(user), class:"btn btn-default", role:"button" %>
-          <%= link_to "Active", active_user_path(user), class:"btn btn-default", role:"button"  %>
+          <%= link_to admin(user), admin_user_path(user), class:"btn btn-primary", role:"button"%>
+          <%= link_to active(user), active_user_path(user), class:"btn btn-default", role:"button"  %>
+          <%= link_to "Delete", user_path(user), :method=>'delete', class:"btn btn-danger", role:"button" %>
         </td>
         </tr>
     <%end%>
   </table>
-
 </div>
+

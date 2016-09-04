@@ -7,11 +7,12 @@ class GroupsController < ApplicationController
 
   def show
     @group=Group.find(params[:id])
-    @posts=Post.where(user_id:@group.group_users.select(:user_id)).order(created_at: :desc)
+    @posts=Post.where(user_id:@group.group_users.select(:user_id)).order(created_at: :desc).page params[:page]
   end
 
   def new
-    @user=current_user
+    @user=session[:user_id]
+    @group=Group.new
   end
 
   def create
@@ -33,5 +34,4 @@ class GroupsController < ApplicationController
   def groups_params
     params.require(:group).permit(:title, :description)
   end
-
 end

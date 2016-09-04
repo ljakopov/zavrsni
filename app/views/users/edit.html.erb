@@ -65,7 +65,7 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-        <%= form_for :user, url:user_path(@user), :method=>'patch' do |f| %>
+        <%= form_for :user, url:image_user_path(@user), :method=>'post' do |f| %>
             <p>
               <%= f.label :image, "Slika: " %>
               <%= f.file_field :image %>

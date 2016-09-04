@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'statistic/index'
+
   resources :activities, :only => [:create, :index]
 
 
@@ -7,15 +9,17 @@ Rails.application.routes.draw do
     resources :posts
   end
 
-  resources :users, :only => [:admin, :active, :confirm_email]    do
+  resources :users, :only => [:admin, :active, :confirm_email, :image]    do
     member do
       get "admin" => "users#admin"
       get "active" => "users#active"
       get "confirm_email" => "users#confirm_email"
+      post "image" => "users#image"
+      get "trazi" => "users#trazi"
     end
   end
 
-  resources :friendships, :only => [:index, :new, :create, :delete]
+  resources :friendships, :only => [:index, :new, :create, :destroy]
 
   resources :posts do
     resources :comments

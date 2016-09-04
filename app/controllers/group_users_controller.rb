@@ -7,24 +7,24 @@ class GroupUsersController < ApplicationController
     @group=Group.find(params[:group_id])
     @without_group_users=@group.group_users
     @friendships=current_user.friendships.where.not(friend_id:@without_group_users.select(:user_id))
-    @users=User.where(id:@without_group_users)
   end
 
   def create
-    @groups=GroupUser.new
     group=Group.find(params[:group_id])
     user=User.find(params[:user_id])
-    group.group_users << @groups
-    user.group_users << @groups
+    @groups=group.group_users.build(:user_id => params[:user_id])
     if @groups.save
       track_activity @groups
+      flash[:notice]="User #{user.username} added to group  #{group.title}"
       redirect_to new_user_group_group_user_path(@groups)
     end
   end
 
   def destroy
+    GroupUser.where(group_id:params[:group_id], user_id:params[:user_id]).destroy_all
     group=Group.find(params[:group_id])
-    GroupUser.find(params[:id]).destroy
+    user=User.find(params[:user_id])
+    flash[:notice]="User " + user.username + " removed from group " + group.title
     redirect_to new_user_group_group_user_path(group)
   end
 
