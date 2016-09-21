@@ -1,3 +1,6 @@
+<% if activity.trackable==nil %> post no longer exists
+    <% else %>
 comment  post <%= link_to activity.trackable.post.title, activity.trackable.post %> <p>comment: <%= activity.trackable.body  %></p>
 <%= image_tag activity.trackable.post.image.url(:thumb)  %>
 <%= time_ago_in_words(activity.created_at)%>
+<% end %>

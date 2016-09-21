@@ -1,7 +1,6 @@
 <h1>Activities</h1>
 
 <% @activities.each do |activity| %>
-    <% if activity.trackable!=nil %>
     <div class="row">
       <div class="col-sm-5 col-md-6">
         <div class="thumbnail">
@@ -10,5 +9,4 @@
         </div>
       </div>
     </div>
-  <% end %>
 <%end%>

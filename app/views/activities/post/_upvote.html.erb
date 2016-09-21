@@ -1,4 +1,7 @@
+<% if activity.trackable==nil %>post no longer exists
+    <% else %>
 likes post <%= link_to activity.trackable.title, post_path(activity.trackable.id) %> from user <%= activity.trackable.user.username  %>
 <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
 <%= image_tag activity.trackable.image.url(:thumb)  %>
 <%= time_ago_in_words(activity.created_at)%>
+<% end %>

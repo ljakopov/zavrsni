@@ -1,3 +1,6 @@
+<% if activity.trackable==nil %>post no longer exists
+    <% else %>
 create new post <%= link_to activity.trackable.title, post_path(activity.trackable.id) %>
 <%= image_tag activity.trackable.image.url(:thumb)  %>
 <%= time_ago_in_words(activity.created_at)%>
+<% end %>

@@ -94,7 +94,7 @@ class UsersController < ApplicationController
   end
 
   def trazi
-      @users = User.search(params[:search]).order("created_at DESC")
+    @users = User.search(params[:search]).order(created_at: :desc)
   end
 
   private
